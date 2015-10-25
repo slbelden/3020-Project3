@@ -15,4 +15,5 @@ public:
 private:
 	int _size;
 	int howFull;
+	int roomLeft;
 };
