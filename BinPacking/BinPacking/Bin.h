@@ -9,15 +9,13 @@
 
 class Bin {
 public:
+	static const unsigned int capacity = 1000000;
+
 	Bin();
-	Bin(int size);
-	int getSize();
-	int getHowFull();
-	int getRoomLeft();
-	void addObject(int object);
+	unsigned int getFilled() const;
+	unsigned int getRoomLeft() const;
+	void insert(unsigned int object);
 
 private:
-	int _size;
-	int howFull;
-	int roomLeft;
+	unsigned int filled;
 };

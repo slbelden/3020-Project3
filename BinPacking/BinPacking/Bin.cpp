@@ -7,49 +7,24 @@
 
 #pragma once
 
-
 #include <iostream>
 #include "Bin.h"
-using std::cout;
 
+Bin::Bin() : filled(0) {}
 
-Bin::Bin() {
-	// _size can be whatever default we decide
-	_size = 10;
-	howFull = 0;
-	roomLeft = _size;
+unsigned int Bin::getFilled() const{
+	return filled;
 }
 
-Bin::Bin(int size) {
-	_size = size;
-	howFull = 0;
-	roomLeft = _size;
+unsigned int Bin::getRoomLeft() const {
+	return capacity - filled;
 }
 
-int Bin::getSize()
-{
-	return _size;
-}
-
-int Bin::getHowFull()
-{
-	return howFull;
-}
-
-int Bin::getRoomLeft()
-{
-	return roomLeft;
-}
-
-void Bin::addObject(int object)
-{
-	if (object > _size)
-	{
-		cout << "ERROR! Object is too big!";
+void Bin::insert(unsigned int object) {
+	if(object > getRoomLeft()) {
+		std::cout << "FATAL: Tried to insert an object into a bin with insufficent room."
+			<< std::endl;
+		exit(1);
 	}
-	if (object <= roomLeft)
-	{
-		howFull+=object;
-		roomLeft -= object;
-	}
+	else filled -= object;
 }
