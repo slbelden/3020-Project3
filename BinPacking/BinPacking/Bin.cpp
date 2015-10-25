@@ -7,7 +7,10 @@
 
 #pragma once
 
+
+#include <iostream>
 #include "Bin.h"
+using std::cout;
 
 
 Bin::Bin() {
@@ -40,6 +43,10 @@ int Bin::getRoomLeft()
 
 void Bin::addObject(int object)
 {
+	if (object > _size)
+	{
+		cout << "ERROR! Object is too big!";
+	}
 	if (object <= roomLeft)
 	{
 		howFull+=object;
