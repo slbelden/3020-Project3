@@ -29,7 +29,7 @@ int main() {
 
 	string command;
 	unsigned int toGenerate = 0;
-	cout << "Enter a command (tests, random): ";
+	cout << "Enter a command (tests, random, complexity): ";
 	getline(cin, command);
 	if(command.substr(0, 1) == string("t")) {
 		cout << "This would run the tests if the tests existed." << endl;
@@ -38,6 +38,9 @@ int main() {
 		cout << "Generate how many random objects? ";
 		cin >> toGenerate;
 		generateRandom(toGenerate);
+	}
+	else if(command.substr(0, 1) == string("c")) {
+		cout << "This would test many input sizes and time the code." << endl;
 	}
 	else cout << "Unrecognized command." << endl;
 	cout << endl << endl;
