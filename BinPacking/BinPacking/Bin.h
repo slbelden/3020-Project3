@@ -11,6 +11,9 @@ class Bin {
 public:
 	Bin();
 	Bin(int size);
+	int getSize();
+	int getHowFull();
+	int getRoomLeft();
 	void addObject(int object);
 
 private:
