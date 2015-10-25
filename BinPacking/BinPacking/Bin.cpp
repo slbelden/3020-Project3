@@ -9,6 +9,8 @@
 
 #include <iostream>
 #include "Bin.h"
+using std::cout;
+using std::endl;
 
 Bin::Bin() : filled(0) {}
 
@@ -22,8 +24,8 @@ unsigned int Bin::getRoomLeft() const {
 
 void Bin::insert(unsigned int object) {
 	if(object > getRoomLeft()) {
-		std::cout << "FATAL: Tried to insert an object into a bin with insufficent room."
-			<< std::endl;
+		cout << "FATAL: Tried to insert an object into a bin with insufficent room."
+			<< endl;
 		exit(1);
 	}
 	else filled -= object;
