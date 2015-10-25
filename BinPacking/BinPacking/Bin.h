@@ -11,6 +11,7 @@ class Bin {
 public:
 	Bin();
 	Bin(int size);
+	void addObject(int object);
 
 private:
 	int _size;

@@ -22,3 +22,12 @@ Bin::Bin(int size) {
 	howFull = 0;
 	roomLeft = _size;
 }
+
+void Bin::addObject(int object)
+{
+	if (object <= roomLeft)
+	{
+		howFull+=object;
+		roomLeft -= object;
+	}
+}
