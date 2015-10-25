@@ -21,9 +21,18 @@
     <ClCompile Include="Bin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Shelf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shelf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

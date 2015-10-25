@@ -5,6 +5,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Bin.h"
+#include "Tests.h"
+#include "Shelf.h"
 using std::cout;
 using std::cin;
 using std::endl;
@@ -14,8 +17,6 @@ using std::vector;
 
 // Global Function Declarations
 void generateRandom(unsigned int numGenerate);
-void insertFirstFit(const vector<double> & list);
-void insertBestFit(const vector<double> & list);
 
 int main() {
 	cout << "This is my bin:" << endl << endl
@@ -32,7 +33,8 @@ int main() {
 	cout << "Enter a command (tests, random, complexity): ";
 	getline(cin, command);
 	if(command.substr(0, 1) == string("t")) {
-		cout << "This would run the tests if the tests existed." << endl;
+		cout << "Starting tests..." << endl;
+		runTests();
 	}
 	else if(command.substr(0, 1) == string("r")) {
 		cout << "Generate how many random objects? ";
@@ -50,14 +52,8 @@ void generateRandom(unsigned int numGenerate) {
 	vector<double> generated;
 	cout << "This would generate " << numGenerate << " objects."
 		<< endl;
-	insertBestFit(generated);
-	insertFirstFit(generated);
-}
-
-void insertFirstFit(const vector<double> & list) {
-	// TODO
-}
-
-void insertBestFit(const vector<double> & list) {
-	// TODO
+	Shelf first = Shelf();
+	Shelf best = Shelf();
+	first.insertFirstFit(generated);
+	best.insertBestFit(generated);
 }
