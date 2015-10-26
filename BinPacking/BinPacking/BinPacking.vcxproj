@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bin.h" />
+    <ClInclude Include="RandomUtilities.h" />
     <ClInclude Include="Shelf.h" />
     <ClInclude Include="Tests.h" />
   </ItemGroup>

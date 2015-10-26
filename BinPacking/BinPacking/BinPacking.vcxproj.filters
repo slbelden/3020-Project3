@@ -35,5 +35,8 @@
     <ClInclude Include="Shelf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RandomUtilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

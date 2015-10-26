@@ -1,5 +1,8 @@
+// Methods for testing bin packing algorithms
+
+// Meghan Haukaas
+// Chris Ruiz
 // Stephen Belden
-// Meghang Haukaas
 
 // 2015-Oct-25
 
@@ -7,23 +10,34 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 #include "Shelf.h"
-
 using std::cout;
 using std::endl;
 using std::vector;
+using std::string;
 
-// Runs all tests, prints output
-void runTests() {
-	cout << endl
-		<< "Test 1: Inserting Nothing" << endl
-		<< "Input:" << endl
-		<< "Expected Output: bin1{}" << endl;
-	vector<double> test1;
-	Shelf A = Shelf();
-	A.insertBestFit(test1);
-	cout << "Best Fit output:" << endl;
-	Shelf B = Shelf();
-	B.insertFirstFit(test1);
-	cout << "First Fit output:" << endl;
+// Test a specific input on both algorithms
+void runTest(string msg, vector<double> input) {
+	cout << endl << msg << endl
+		<< "Input: ";
+	if(input.size() >= 20) {
+		cout << "Input size greater than 20, skipping printing";
+	}
+	else {
+		for each (double n in input) cout << n << ", ";
+	}
+	cout << endl;
+	Shelf A, B = Shelf();
+	A.insertFirstFit(input);
+	cout << "First Fit Output: " << A << endl;
+	B.insertBestFit(input);
+	cout << "Best Fit Output:  " << B << endl;
+}
+
+// Runs all tests
+void runAllTestCases() {
+	runTest("Test 1 - Inserting Nothing", {});
+	runTest("Test 2 - Inserting 1 element equal to the bin size", {0.1});
+	// TODO
 }

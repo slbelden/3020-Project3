@@ -1,6 +1,8 @@
+// Meghan Haukaas
+// Chris Ruiz
 // Stephen Belden
 
-// 2015-Oct-20
+// 2015-Oct-25
 
 #include <iostream>
 #include <string>
@@ -8,6 +10,7 @@
 #include "Bin.h"
 #include "Tests.h"
 #include "Shelf.h"
+#include "RandomUtilities.h"
 using std::cout;
 using std::cin;
 using std::endl;
@@ -16,25 +19,16 @@ using std::getline;
 using std::vector;
 
 // Global Function Declarations
-void generateRandom(unsigned int numGenerate);
+void generateRandom(int numGenerate);
 
 int main() {
-	cout << "This is my bin:" << endl << endl
-		<< " ____#____" << endl;
-	for(int i = 0; i < 7; i++) {
-		cout << " |       |" << endl;
-	}
-	cout << " ---------" << endl
-		<< endl << "There are many like it, but mine is well-packed."
-		<< endl << endl;
-
 	string command;
-	unsigned int toGenerate = 0;
-	cout << "Enter a command (tests, random, complexity): ";
+	int toGenerate = 0;
+	cout << "Enter a command (tests, random, complexity, exit): ";
 	getline(cin, command);
 	if(command.substr(0, 1) == string("t")) {
-		cout << "Starting tests..." << endl;
-		runTests();
+		cout << "Running All Test Casses..." << endl;
+		runAllTestCases();
 	}
 	else if(command.substr(0, 1) == string("r")) {
 		cout << "Generate how many random objects? ";
@@ -43,17 +37,17 @@ int main() {
 	}
 	else if(command.substr(0, 1) == string("c")) {
 		cout << "This would test many input sizes and time the code." << endl;
+		// TODO
 	}
+	else if(command.substr(0, 1) == string("e")) exit(0);
 	else cout << "Unrecognized command." << endl;
-	cout << endl << endl;
+	cout << endl;
 }
 
-void generateRandom(unsigned int numGenerate) {
+void generateRandom(int numGenerate) {
 	vector<double> generated;
-	cout << "This would generate " << numGenerate << " objects."
-		<< endl;
-	Shelf first = Shelf();
-	Shelf best = Shelf();
-	first.insertFirstFit(generated);
-	best.insertBestFit(generated);
+	randomizeSeed();
+	for(int i = 0; i < numGenerate; i++) generated.push_back(randUniform());
+	cout << "Generated " << generated.size() << " random input objects." << endl;
+	runTest("Test on Randomly Generated Input", generated);
 }

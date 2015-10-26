@@ -1,21 +1,23 @@
-// Bin.h
-// Contains a specific amount of things.
+// Has a capacity; can hold any number of objects as long as
+// their combined size is less than the bin's capacity.
+
 // Meghan Haukaas
 // Chris Ruiz
 // Stephen Belden
+
 // 2015-Oct-25
 
 #pragma once
 
 class Bin {
 public:
-	static const unsigned int capacity = 1000000;
+	double capacity = 1.0;
 
 	Bin();
-	unsigned int getFilled() const;
-	unsigned int getRoomLeft() const;
-	void insert(unsigned int object);
+	double getFilled() const;
+	double getRoomLeft() const;
+	void insert(double object);
 
 private:
-	unsigned int filled;
+	double filled;
 };
