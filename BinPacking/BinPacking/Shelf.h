@@ -20,8 +20,10 @@ public:
 	void insertFirstFit(const vector<double> & list);
 	void insertBestFit(const vector<double> & list);
 	int getNumBins() const;
+	double getTime() const;
 	friend ostream& operator<<(ostream& os, const Shelf& obj);
 
 private:
 	vector<Bin> _shelf;
+	double _time;
 };

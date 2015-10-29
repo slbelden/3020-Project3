@@ -34,9 +34,11 @@ void runTest(string msg, vector<double> input) {
 	cout << endl;
 	Shelf A, B = Shelf();
 	A.insertFirstFit(input);
-	cout << "First Fit Output: " << A << endl;
+	cout << "First Fit Output: " << A << endl
+		<< "First Fit - Elapsed time: " << A.getTime() << " seconds." << endl;
 	B.insertBestFit(input);
-	cout << "Best Fit Output:  " << B << endl;
+	cout << "Best Fit Output:  " << B << endl
+		<< "Best Fit - Elapsed time: " << A.getTime() << " seconds." << endl;
 }
 
 // Runs all tests

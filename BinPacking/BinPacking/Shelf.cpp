@@ -27,7 +27,7 @@ void Shelf::insertFirstFit(const vector<double> & list) {
 	// TODO - Implement algorithm
 
 	timer.stop();
-	cout << "First Fit - Elapsed time: " << timer() << " seconds." << endl;
+	_time = timer();
 }
 
 void Shelf::insertBestFit(const vector<double> & list) {
@@ -37,11 +37,15 @@ void Shelf::insertBestFit(const vector<double> & list) {
 	// TODO - Implement algorithm
 
 	timer.stop();
-	cout << "Best Fit - Elapsed time: " << timer() << " seconds." << endl;
+	_time = timer();
 }
 
 int Shelf::getNumBins() const {
 	return _shelf.size();
+}
+
+double Shelf::getTime() const {
+	return _time;
 }
 
 ostream& operator<<(ostream& os, const Shelf& obj) {
