@@ -20,10 +20,8 @@ public:
 	void insertFirstFit(const vector<double> & list);
 	void insertBestFit(const vector<double> & list);
 	int getNumBins() const;
-	void Shelf::print() const;
+	friend ostream& operator<<(ostream& os, const Shelf& obj);
 
 private:
 	vector<Bin> _shelf;
 };
-
-ostream& operator<<(ostream& os, const Shelf& obj);
