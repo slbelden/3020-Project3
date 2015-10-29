@@ -7,9 +7,11 @@
 #pragma once
 
 #include "Shelf.h"
+#include "winTimer.h"
 #include <vector>
 #include <iostream>
 using std::cout;
+using std::endl;
 using std::vector;
 using std::ostream;
 
@@ -19,11 +21,23 @@ Shelf::Shelf() {
 }
 
 void Shelf::insertFirstFit(const vector<double> & list) {
-	// TODO
+	Timer timer;
+	timer.start();
+
+	// TODO - Implement algorithm
+
+	timer.stop();
+	cout << "First Fit - Elapsed time: " << timer() << " seconds." << endl;
 }
 
 void Shelf::insertBestFit(const vector<double> & list) {
-	// TODO
+	Timer timer;
+	timer.start();
+
+	// TODO - Implement algorithm
+
+	timer.stop();
+	cout << "Best Fit - Elapsed time: " << timer() << " seconds." << endl;
 }
 
 int Shelf::getNumBins() const {
