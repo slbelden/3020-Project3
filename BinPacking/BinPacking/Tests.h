@@ -13,7 +13,9 @@
 #include <string>
 #include <stack>
 #include "Shelf.h"
+#include "RandomUtilities.h"
 using std::cout;
+using std::cin;
 using std::endl;
 using std::vector;
 using std::string;
@@ -50,7 +52,7 @@ void runAllTestCases() {
 	
 	// Test 4
 	double n;
-	cout << "Provide an n-value (n > 0) for Test 4: ";
+	cout << endl << "Provide an n-value (n > 0) for Test 4: ";
 	cin >> n;
 	vector<double> collection;
 	if (n > 0) {
@@ -62,7 +64,7 @@ void runAllTestCases() {
 	collection.clear();
 
 	// Test 5
-	cout << "Provide an n-value (n > 0) for Test 5: ";
+	cout << endl << "Provide an n-value (n > 0) for Test 5: ";
 	cin >> n;
 	if (n > 0) {
 		for (int i = 0; i < n; i++) {
@@ -77,7 +79,7 @@ void runAllTestCases() {
 
 	// Test 7
 	// Utilizes custom "bloating" algorithm to create large amounts of input data
-	cout << "Provide an n-value (n > 0) for Test 7: ";
+	cout << endl << "Provide an n-value (n > 0) for Test 7: ";
 	cin >> n;
 	if (n > 0) {
 		stack<double> splittingStack;
@@ -111,7 +113,7 @@ void runAllTestCases() {
 	collection.clear();
 
 	// Test 8
-	cout << "Provide an n-value (n > 0) for Test 8: ";
+	cout << endl << "Provide an n-value (n > 0) for Test 8: ";
 	cin >> n;
 	if (n > 0) {
 		for (int i = 0; i < n; i++) {
