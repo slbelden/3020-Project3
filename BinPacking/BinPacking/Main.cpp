@@ -23,7 +23,7 @@ void generateRandom(int numGenerate);
 
 int main() {
 	string command;
-	int toGenerate = 0;
+	int toGenerate;
 	cout << "Enter a command (tests, random, complexity, exit): ";
 	getline(cin, command);
 	if(command.substr(0, 1) == string("t")) {
@@ -36,35 +36,26 @@ int main() {
 		generateRandom(toGenerate);
 	}
 	else if(command.substr(0, 1) == string("c")) {
-		double previousTime = 0.0;
 		cout << endl << "This code will run unill an insert call takes longer than 10 seconds"
-			<< endl << endl
-			<< "Best Fit:" << endl;
-		for(int i = 1; previousTime < 10.0; i *= 2) {
-			Shelf a = Shelf();
-			vector<double> generated;
-			for(int j = 0; j < i; j++) generated.push_back(randUniform());
-			a.insertBestFit(generated);
-			// Make sure everything is lined up by inserting tabs only when the
-			// int to be printed is short:
-			cout << "Inserting " << generated.size() << (( i< 100000)?"\t\t":"\t")
-				<< "elements using best fit took " << a.getTime() << " seconds." << endl;
-			previousTime = a.getTime();
+			<< endl << endl;
+		for(int twice = 0; twice < 2; twice++) {
+			double previousTime = 0.0;
+			cout << ((twice == 0) ? "Best Fit:" : "First Fit:") << endl;
+			for(int i = 1; previousTime < 10.0; i *= 2) {
+				Shelf a = Shelf();
+				vector<double> generated;
+				for(int j = 0; j < i; j++) generated.push_back(randUniform());
+				((twice == 0) ? a.insertBestFit(generated) : a.insertFirstFit(generated));
+				// Make sure everything is lined up by inserting tabs only when the
+				// int to be printed is short:
+				cout << "Inserting " << generated.size() << ((i < 100000) ? "\t\t" : "\t")
+					<< "elements using " << ((twice == 0) ? "best fit" : "first fit:")
+					<< " took " << a.getTime() << " seconds." << endl;
+				previousTime = a.getTime();
+			}
+			previousTime = 0.0;
+			cout << endl << endl;
 		}
-		cout << endl << endl << "First Fit:" << endl;
-		previousTime = 0.0;
-		for(int i = 1;  previousTime < 10.0; i *= 2) {
-			Shelf b = Shelf();
-			vector<double> generated;
-			for(int j = 0; j < i; j++) generated.push_back(randUniform());
-			b.insertFirstFit(generated);
-			// Make sure everything is lined up by inserting tabs only when the
-			// int to be printed is short:
-			cout << "Inserting " << generated.size() << ((i < 100000) ? "\t\t" : "\t")
-				<< "elements using first fit took " << b.getTime() << " seconds." << endl;
-			previousTime = b.getTime();
-		}
-		
 	}
 	else if(command.substr(0, 1) == string("e")) exit(0);
 	else cout << "Unrecognized command." << endl << endl;
