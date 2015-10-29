@@ -11,11 +11,13 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <stack>
 #include "Shelf.h"
 using std::cout;
 using std::endl;
 using std::vector;
 using std::string;
+using std::stack;
 
 // Test a specific input on both algorithms
 void runTest(string msg, vector<double> input) {
