@@ -61,6 +61,7 @@ ostream& operator<<(ostream& os, const Shelf& obj) {
 	for each(Bin b in obj._shelf) {
 		os << "{" << b.getFilled() << "}, ";
 	}
-	os << "\b\b"; // two backspaces, removes the ending ", " in the stream
+	os << "\b\b"; // "\b\b" just moves the cursor back two spots,
+	os << "  "; // so we also have to overwrite those spots with something.
 	return os;
 }
