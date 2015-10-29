@@ -10,6 +10,7 @@
 #include "winTimer.h"
 #include <vector>
 #include <iostream>
+#include <algorithm> // Just for bogus code, remove later
 using std::cout;
 using std::endl;
 using std::vector;
@@ -26,6 +27,11 @@ void Shelf::insertFirstFit(const vector<double> & list) {
 
 	// TODO - Implement algorithm
 
+	// Bogus code just so time complexity isn't always 0
+	// Using an algorithm known to be O(N log N)
+	vector<double> nonConstList = list;
+	std::sort(nonConstList.begin(), nonConstList.end());
+
 	timer.stop();
 	_time = timer();
 }
@@ -34,7 +40,10 @@ void Shelf::insertBestFit(const vector<double> & list) {
 	Timer timer;
 	timer.start();
 
-	// TODO - Implement algorithm
+	// Bogus code just so time complexity isn't always 0
+	// Using an algorithm known to be O(N log N)
+	vector<double> nonConstList = list;
+	std::sort(nonConstList.begin(), nonConstList.end());
 
 	timer.stop();
 	_time = timer();
