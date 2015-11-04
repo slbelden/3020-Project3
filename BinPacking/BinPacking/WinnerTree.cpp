@@ -90,10 +90,10 @@ WinnerTree * WinnerTree::insertNode(int root)
 		return &leaf;
 	}
 	// a node on the left and a leaf on the right
-	else if (!(*left_).isLeaf() && (*right_).isLeaf())
+	else if (!((*left_).isLeaf()) && (*right_).isLeaf())
 	{
 		WinnerTree node = WinnerTree(right_, &leaf, 0);
-		node.parent_ = (*right_).getParent;
+		node.parent_ = right_->parent_;
 		right_ = &node;
 		(*right_).parent_ = &node;
 		leaf.parent_ = &node;
@@ -102,7 +102,7 @@ WinnerTree * WinnerTree::insertNode(int root)
 	}
 	// the left and right are nodes and
 	// the left height is greater than the right height by 2
-	else if (!(*(left_->left_)).isLeaf && (*(right_->right_)).isLeaf)
+	else if (!((*(*left_).left_).isLeaf) && (*(*right_).right_).isLeaf)
 	{
 		(*right_).insertNode(root);
 	}
