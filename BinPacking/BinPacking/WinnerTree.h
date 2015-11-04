@@ -10,11 +10,14 @@ public:
 	WinnerTree getLeft();
 	WinnerTree getRight();
 	WinnerTree getParent();
+	WinnerTree * getCurrent();
+	bool isLeaf();
 	int getRoot();
-	void insertNumber(int insert);
+	WinnerTree * insertNode(int root);
 	void replay();
 	void battle();
-	void tournament(WinnerTree win);
+	void tournament();
+	WinnerTree * fits(int test);
 
 
 private:
@@ -22,4 +25,5 @@ private:
 	WinnerTree * left_;
 	WinnerTree * right_;
 	WinnerTree * parent_;
+	WinnerTree * current_;
 };
