@@ -3,8 +3,9 @@
 
 // Meghan Haukaas
 
-#include "WinnerTree.h"
+// 2015-Nov-03
 
+#include "WinnerTree.h"
 
 //Creates a Leaf
 WinnerTree::WinnerTree(int root)
@@ -70,7 +71,7 @@ bool WinnerTree::isLeaf()
 
 // find the first node that had an internal node on the left
 // and a leaf on the right
-//creates a new node that replaces a leaf with a node
+// creates a new node that replaces a leaf with a node
 // with an internal node having the leaf on the left and the
 // new leaf on the right
 // returns a ponter to the new leaf

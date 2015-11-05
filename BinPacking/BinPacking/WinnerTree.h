@@ -2,7 +2,11 @@
 // Tournament Tree
 
 // Meghan Haukaas
+
+// 2015-Nov-03
+
 #pragma once
+
 class WinnerTree {
 public:
 	WinnerTree(int root);
@@ -18,7 +22,6 @@ public:
 	void battle();
 	void tournament();
 	WinnerTree * fits(int test);
-
 
 private:
 	int root_;
