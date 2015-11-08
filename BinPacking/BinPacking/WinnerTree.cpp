@@ -103,7 +103,7 @@ WinnerTree * WinnerTree::insertNode(int root)
 	}
 	// the left and right are nodes and
 	// the left height is greater than the right height by 2
-	else if (!((*(*left_).left_).isLeaf()) && (*(*right_).right_).isLeaf())
+	else if (!((*(*left_).right_).isLeaf()) && (*(*right_).right_).isLeaf())
 	{
 		(*right_).insertNode(root);
 	}
@@ -140,7 +140,7 @@ void WinnerTree::battle()
 
 // recursively calls battle to reflect the "winners" of each pair of nodes
 // the highest value will be the root of the top node
-//Tournament also assigns parents!
+// Tournament also assigns parents!
 void WinnerTree::tournament()
 {
 	if (left_ != nullptr)

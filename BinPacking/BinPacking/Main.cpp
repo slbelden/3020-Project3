@@ -10,6 +10,7 @@
 #include "Bin.h"
 #include "Tests.h"
 #include "Shelf.h"
+#include "WinnerTree.h"
 #include "RandomUtilities.h"
 using std::cout;
 using std::cin;
