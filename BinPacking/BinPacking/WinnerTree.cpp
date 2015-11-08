@@ -78,30 +78,30 @@ bool WinnerTree::isLeaf()
 // new leaf on the right
 // returns a ponter to the new leaf
 // insertNode reassigns parents
-WinnerTree * WinnerTree::insertNode(int root)
+void WinnerTree::insertNode(int root)
 {
 	// a leaf
 	WinnerTree leaf = WinnerTree(root);
+	WinnerTree original = WinnerTree(root_);
 	if (left_ == nullptr)
 	{
-		WinnerTree node = WinnerTree(current_, &leaf, 0);
-		node.left_ = current_;
-		node.right_ = &leaf;
-		node.battle();
-		leaf.parent_ = &node;
-		parent_ = &node;
-		return &leaf;
+		left_ = &original;
+		right_ = &leaf;
+		battle();
+		leaf.parent_ = current_;
+		original.parent_ = current_;
+		leaf.replay();
 	}
 	// a node on the left and a leaf on the right
 	else if (!((*left_).isLeaf()) && (*right_).isLeaf())
 	{
 		WinnerTree node = WinnerTree(right_, &leaf, 0);
-		node.parent_ = right_->parent_;
-		right_ = &node;
-		(*right_).parent_ = &node;
-		leaf.parent_ = &node;
-		node.battle();
-		return &leaf;
+		left_ = &original;
+		right_ = &leaf;
+		original.parent_ = current_;
+		leaf.parent_ = current_;
+		battle();
+		leaf.replay();
 	}
 	// the left and right are nodes and
 	// the left height is greater than the right height by 2
