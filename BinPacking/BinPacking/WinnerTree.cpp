@@ -5,6 +5,8 @@
 
 // 2015-Nov-03
 
+#include <iostream>
+using std::cout;
 #include "WinnerTree.h"
 
 //Creates a Leaf
@@ -181,4 +183,16 @@ WinnerTree * WinnerTree::fits(int test)
 		(*right_).fits(test);
 	}
 	return nullptr;
+}
+
+void WinnerTree::print_inorder() {
+	inorder(current_);
+}
+
+void WinnerTree::inorder(WinnerTree* p) {
+	if(p != nullptr) {
+		if(p->left_) inorder(p->left_);
+		cout << " " << p->root_ << " ";
+		if(p->right_) inorder(p->right_);
+	}
 }

@@ -23,6 +23,24 @@ using std::vector;
 void generateRandom(int numGenerate);
 
 int main() {
+	WinnerTree T = WinnerTree(1);
+	cout << "At Construction:" << endl;
+	T.print_inorder();
+	cout << endl;
+
+	T.insertNode(2);
+	T.print_inorder();
+	cout << endl;
+
+	T.insertNode(3);
+	T.print_inorder();
+	cout << endl;
+
+	T.insertNode(4);
+	T.print_inorder();
+	cout << endl;
+
+	/*
 	string command;
 	int toGenerate;
 	cout << "Enter a command (tests, random, complexity, exit): ";
@@ -60,6 +78,7 @@ int main() {
 	}
 	else if(command.substr(0, 1) == string("e")) exit(0);
 	else cout << "Unrecognized command." << endl << endl;
+	*/
 }
 
 void generateRandom(int numGenerate) {

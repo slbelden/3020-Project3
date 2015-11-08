@@ -22,6 +22,8 @@ public:
 	void battle();
 	void tournament();
 	WinnerTree * fits(int test);
+	void WinnerTree::print_inorder();
+	void WinnerTree::inorder(WinnerTree* p);
 
 private:
 	int root_;
