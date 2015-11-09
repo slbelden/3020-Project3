@@ -22,6 +22,7 @@ public:
 	void battle();
 	void tournament();
 	WinnerTree * fits(int test);
+	bool isPerm();
 	void WinnerTree::print_inorder();
 	void WinnerTree::inorder(WinnerTree* p);
 
@@ -31,4 +32,5 @@ private:
 	WinnerTree * right_;
 	WinnerTree * parent_;
 	WinnerTree * current_;
+	bool perm;
 };

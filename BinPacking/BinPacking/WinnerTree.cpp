@@ -16,6 +16,7 @@ WinnerTree::WinnerTree(int root) {
 	right_ = nullptr;
 	root_ = root;
 	current_ = this;
+	perm = true;
 }
 
 // Creates an inner node
@@ -25,6 +26,7 @@ WinnerTree::WinnerTree(WinnerTree * left, WinnerTree * right, int root) {
 	root_ = root;
 	parent_ = nullptr;
 	current_ = this;
+	perm = false;
 }
 
 // retruns a pointer to the left tree
@@ -71,7 +73,7 @@ bool WinnerTree::isLeaf() {
 // insertNode reassigns parents
 void WinnerTree::insertNode(int root) {
 	WinnerTree* leaf = new WinnerTree(root);
-	WinnerTree* original = new WinnerTree(root_);
+	WinnerTree* original = new WinnerTree(left_, right_, root_);
 
 	// base case
 	if(left_ == nullptr) {
@@ -82,6 +84,23 @@ void WinnerTree::insertNode(int root) {
 		leaf->replay();
 	}
 
+	// current is permanent
+	else if ((*current_).isPerm)
+	{
+		left_ = original;
+		right_ = leaf;
+		leaf->parent_ = current_;
+		original->parent_ = current_;
+		leaf->replay();
+	}
+
+	// current is not permanent
+	else
+	{
+		right_->insertNode(root);
+	}
+
+	/*
 	// height case
 	else {
 		// get heights
@@ -105,7 +124,7 @@ void WinnerTree::insertNode(int root) {
 			(*right_).insertNode(root);
 		}
 	}
-
+	*/
 
 	/*
 	// a node on the right and a leaf on the left
@@ -144,12 +163,26 @@ void WinnerTree::replay() {
 }
 
 // set's the root of a node to the higher of its children's roots
+// sets peranance of node
+// if a node is a leaf or has two permanent children, it is permanemt
 void WinnerTree::battle() {
-	if(left_->root_ >= right_->root_) {
+	if (left_ == nullptr)
+	{
+		perm = true;
+	}
+	else if(left_->root_ >= right_->root_) {
 		root_ = left_->root_;
 	}
 	else {
 		root_ = right_->root_;
+	}
+	if ((*left_).isPerm() && (*right_).isPerm())
+	{
+		perm = true;
+	}
+	else
+	{
+		perm = false;
 	}
 }
 
@@ -188,6 +221,15 @@ WinnerTree * WinnerTree::fits(int test) {
 		(*right_).fits(test);
 	}
 	return nullptr;
+}
+
+bool WinnerTree::isPerm()
+{
+	if ((left_ == nullptr && right_ == nullptr) || ((*left_).isPerm() && (*right_).isPerm()))
+	{
+		return true;
+	}
+	return false;
 }
 
 void WinnerTree::print_inorder() {
