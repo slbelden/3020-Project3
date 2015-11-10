@@ -24,10 +24,13 @@ void generateRandom(int numGenerate);
 
 int main() {
 	WinnerTree T = WinnerTree(1.0);
+	//WinnerTree W = WinnerTree(1.0);
+	//WinnerTree T = WinnerTree(&X, &W, 1.0);
 	cout << "At Construction:" << endl;
 	T.print_inorder();
 	cout << endl << endl;
 
+	//T.insertNode(1.0);
 	T.insertObject(0.1);
 	T.insertObject(0.3);
 	T.insertObject(0.7);
@@ -36,7 +39,7 @@ int main() {
 	T.insertObject(0.8);
 	T.insertObject(0.4);
 	T.insertObject(0.5);
-
+	
 	cout << "After Insertions: " << endl;
 	T.print_inorder();
 	cout << endl;

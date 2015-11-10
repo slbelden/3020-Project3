@@ -27,5 +27,5 @@ void Bin::insert(double object) {
 			<< endl;
 		exit(1);
 	}
-	else filled -= object;
+	else filled += object;
 }

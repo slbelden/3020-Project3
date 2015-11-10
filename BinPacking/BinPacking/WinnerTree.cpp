@@ -78,6 +78,8 @@ void WinnerTree::insertNode(double root) {
 	// being deleted at the end of the block
 	WinnerTree* leaf = new WinnerTree(root);
 	WinnerTree* original = new WinnerTree(left_, right_, root_);
+	original->perm_ = perm_;
+	original->bin_ = bin_;
 
 	// base case
 	if(left_ == nullptr) {
@@ -85,6 +87,7 @@ void WinnerTree::insertNode(double root) {
 		right_ = leaf;
 		leaf->parent_ = current_;
 		original->parent_ = current_;
+		perm_ = true;
 		leaf->replay();
 	}
 
@@ -95,6 +98,7 @@ void WinnerTree::insertNode(double root) {
 		right_ = leaf;
 		leaf->parent_ = current_;
 		original->parent_ = current_;
+		perm_ = isPerm();
 		leaf->replay();
 	}
 
@@ -180,14 +184,6 @@ void WinnerTree::battle() {
 	else {
 		root_ = right_->root_;
 	}
-	if ((*left_).isPerm() && (*right_).isPerm())
-	{
-		perm_ = true;
-	}
-	else
-	{
-		perm_ = false;
-	}
 }
 
 // recursively calls battle to reflect the "winners" of each pair of nodes
@@ -210,21 +206,24 @@ void WinnerTree::tournament() {
 // if the input is larger than any roots, nullptr is returned
 bool WinnerTree::fits(double test) {
 	if((*current_).isLeaf()) {
-		if(root_ > test) {
+		if(root_ >= test) {
 			return true;
 		}
+		else
+		{
+			return false;
+		}
 	}
-	else if((*left_).isLeaf()) {
+	/*else if((*left_).isLeaf()) {
 		(*left_).fits(test);
 	}
 	else if((*right_).isLeaf()) {
 		(*right_).fits(test);
-	}
+	}*/
 	else {
 		(*left_).fits(test);
 		(*right_).fits(test);
 	}
-	return false;
 }
 
 bool WinnerTree::isPerm()
@@ -261,6 +260,7 @@ void WinnerTree::insertObject(double object)
 	{
 		(*bin_).insert(object);
 		root_ = (*bin_).getRoomLeft();
+		//	root_ -= object;
 		replay();
 	}
 	else if (fits(object) && (*left_).fits(object))
@@ -274,6 +274,7 @@ void WinnerTree::insertObject(double object)
 	else
 	{
 		insertNode(1.0);
+		tournament();
 		insertObject(object);
 	}
 }
