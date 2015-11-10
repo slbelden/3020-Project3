@@ -132,7 +132,7 @@ unsigned int ArrayTree::fit(double obj) {
 		// We must consider that the last element of that row
 		// references different elements
 		if(tree[level - 1].size() % 2 == 1 && 
-			tree[level - 1].size() - 1 == location) {
+			tree[level - 1].size() - 1 == left) {
 			left--;
 			right--;
 		}
@@ -151,6 +151,7 @@ unsigned int ArrayTree::fit(double obj) {
 		modify(location, obj);
 	}
 	// If the found location is too small, a new empty bin is needed
+	// And the bin to insert into must be the one after the found location
 	else if(tree[0][location] < obj) {
 		insert(1.0);
 		modify(location + 1, obj);
