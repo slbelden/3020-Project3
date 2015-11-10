@@ -145,8 +145,13 @@ unsigned int ArrayTree::fit(double obj) {
 		level--;
 	} while (level > 0);
 
+	// If the found location does not exist, a new empty bin is needed
+	if(tree[0].size() - 1 < location) {
+		insert(1.0);
+		modify(location, obj);
+	}
 	// If the found location is too small, a new empty bin is needed
-	if(tree[0].size() - 1 < location || tree[0][location] < obj) {
+	else if(tree[0][location] < obj) {
 		insert(1.0);
 		modify(location + 1, obj);
 	}
