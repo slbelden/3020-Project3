@@ -227,11 +227,30 @@ WinnerTree * WinnerTree::fits(int test) {
 
 bool WinnerTree::isPerm()
 {
-	if ((left_ == nullptr && right_ == nullptr) || ((*left_).isPerm() && (*right_).isPerm()))
+	if ((left_ == nullptr && right_ == nullptr))
 	{
 		return true;
 	}
-	return false;
+
+	// height case
+	else {
+		// get heights
+		int rightHeight = 1, leftHeight = 1;
+		WinnerTree* temp = left_;
+		while (temp != nullptr) {
+			leftHeight++;
+			temp = temp->left_;
+		}
+		temp = right_;
+		while (temp != nullptr) {
+			rightHeight++;
+			temp = temp->right_;
+		}
+		if (rightHeight < leftHeight) {
+			return false;
+			}
+		}
+	return true;
 }
 
 void WinnerTree::print_inorder() {
