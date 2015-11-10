@@ -168,12 +168,18 @@ unsigned int ArrayTree::fit(double obj) {
 	}
 }
 
-void ArrayTree::print() const {
+void ArrayTree::printAll() const {
 	for(unsigned int row = 0; row < tree.size(); row++) {
 		for(unsigned int element = 0; element < tree[row].size(); element++) {
 			cout << tree[row][element];
 			for(unsigned int i = 0; i < row+1; i++) cout << " ";
 		}
 		cout << endl;
+	}
+}
+
+void ArrayTree::printBins() const {
+	for each (double n in tree[0]) {
+		cout << n << " ";
 	}
 }

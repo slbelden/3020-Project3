@@ -12,8 +12,9 @@
 #include <vector>
 #include <string>
 #include <stack>
-#include "Shelf.h"
+#include <algorithm>
 #include "RandomUtilities.h"
+#include "winTimer.h"
 using std::cout;
 using std::cin;
 using std::endl;
@@ -32,13 +33,14 @@ void runTest(string msg, vector<double> input) {
 		for each (double n in input) cout << n << ", ";
 	}
 	cout << endl;
-	Shelf A, B = Shelf();
-	A.insertFirstFit(input);
-	cout << "First Fit Output: " << A << endl
-		<< "First Fit - Elapsed time: " << A.getTime() << " seconds." << endl;
-	B.insertBestFit(input);
-	cout << "Best Fit Output:  " << B << endl
-		<< "Best Fit - Elapsed time: " << A.getTime() << " seconds." << endl;
+	ArrayTree A = ArrayTree(1.0);
+	Timer T = Timer();
+	T.start();
+	for each (double n in input) A.fit(n);
+	T.stop();
+	cout << "First Fit Output: " << endl;
+	A.printBins();
+	cout << endl << "First Fit - Elapsed time: " << T() << " seconds." << endl;
 }
 
 // Runs all tests
@@ -111,6 +113,9 @@ void runAllTestCases() {
 			}
 		}
 	}
+
+	// Step 3: Shuffle the collection
+	random_shuffle(collection.begin(), collection.end());
 	runTest("Test 7 - Inserting large set of perfectly fitting objects into n bins", collection);
 	collection.clear();
 

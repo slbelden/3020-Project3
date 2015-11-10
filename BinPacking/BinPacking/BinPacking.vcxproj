@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{ACFD2471-FFEB-476B-9A64-EF2989DC8925}</ProjectGuid>
+    <ProjectGuid>{4ADF1632-F328-44A0-8C14-FB60CF89B07F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>BinPacking</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
@@ -142,18 +142,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bin.cpp" />
+    <ClCompile Include="arrayTree.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Shelf.cpp" />
-    <ClCompile Include="WinnerTree.cpp" />
     <ClCompile Include="winTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bin.h" />
+    <ClInclude Include="arrayTree.h" />
     <ClInclude Include="RandomUtilities.h" />
-    <ClInclude Include="Shelf.h" />
     <ClInclude Include="Tests.h" />
-    <ClInclude Include="WinnerTree.h" />
     <ClInclude Include="winTimer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

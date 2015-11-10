@@ -31,7 +31,8 @@ public:
 	void insert(double data);
 	void modify(unsigned int location, double data);
 	unsigned int fit(double obj);
-	void print() const;
+	void printAll() const;
+	void printBins() const;
 
 private:
 	vector<vector<double>> tree;

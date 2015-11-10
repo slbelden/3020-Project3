@@ -7,10 +7,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Bin.h"
+#include "arrayTree.h"
 #include "Tests.h"
-#include "Shelf.h"
-#include "WinnerTree.h"
 #include "RandomUtilities.h"
 using std::cout;
 using std::cin;
@@ -23,67 +21,47 @@ using std::vector;
 void generateRandom(int numGenerate);
 
 int main() {
-	WinnerTree T = WinnerTree(1.0);
-	//WinnerTree W = WinnerTree(1.0);
-	//WinnerTree T = WinnerTree(&X, &W, 1.0);
-	cout << "At Construction:" << endl;
-	T.print_inorder();
-	cout << endl << endl;
-
-	//T.insertNode(1.0);
-	T.insertObject(0.1);
-	T.insertObject(0.3);
-	T.insertObject(0.7);
-	T.insertObject(0.2);
-	T.insertObject(0.1);
-	T.insertObject(0.8);
-	T.insertObject(0.4);
-	T.insertObject(0.5);
-	
-	cout << "After Insertions: " << endl;
-	T.print_inorder();
-	cout << endl;
-	cout << "Max Height is " << T.maxHeight() << endl;
-
-	/*
 	string command;
 	int toGenerate;
 	cout << "Enter a command (tests, random, complexity, exit): ";
 	getline(cin, command);
+
 	if(command.substr(0, 1) == string("t")) {
 		cout << "Running All Test Casses..." << endl;
 		runAllTestCases();
 	}
+
 	else if(command.substr(0, 1) == string("r")) {
 		cout << "Generate how many random objects? ";
 		cin >> toGenerate;
 		generateRandom(toGenerate);
 	}
+
 	else if(command.substr(0, 1) == string("c")) {
 		cout << endl << "This code will run unill an insert call takes longer than 10 seconds"
 			<< endl << endl;
-		for(int twice = 0; twice < 2; twice++) {
-			double previousTime = 0.0;
-			cout << ((twice == 0) ? "Best Fit:" : "First Fit:") << endl;
-			for(int i = 1; previousTime < 10.0; i *= 2) {
-				Shelf a = Shelf();
-				vector<double> generated;
-				for(int j = 0; j < i; j++) generated.push_back(randUniform());
-				((twice == 0) ? a.insertBestFit(generated) : a.insertFirstFit(generated));
-				// Make sure everything is lined up by inserting tabs only when the
-				// int to be printed is short:
-				cout << "Inserting " << generated.size() << ((i < 100000) ? "\t\t" : "\t")
-					<< "elements using " << ((twice == 0) ? "best fit" : "first fit:")
-					<< " took " << a.getTime() << " seconds." << endl;
-				previousTime = a.getTime();
-			}
-			previousTime = 0.0;
-			cout << endl << endl;
+		double previousTime = 0.0;
+		cout << "First Fit:" << endl;
+		for(int i = 1; previousTime < 10.0; i *= 2) {
+			ArrayTree A = ArrayTree(1.0);
+			Timer T = Timer();
+			vector<double> generated;
+			for(int j = 0; j < i; j++) generated.push_back(randUniform());
+			T.start();
+			for each (double n in generated) A.fit(n);
+			T.stop();
+			// Make sure everything is lined up by inserting tabs only when the
+			// int to be printed is short:
+			cout << "Inserting " << generated.size() << ((i < 100000) ? "\t\t" : "\t")
+				<< "elements using first fit took " << T() << " seconds." << endl;
+			previousTime = T();
 		}
+		previousTime = 0.0;
+		cout << endl << endl;
 	}
+
 	else if(command.substr(0, 1) == string("e")) exit(0);
 	else cout << "Unrecognized command." << endl << endl;
-	*/
 }
 
 void generateRandom(int numGenerate) {
