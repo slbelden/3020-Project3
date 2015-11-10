@@ -15,6 +15,8 @@
 #include <algorithm>
 #include "RandomUtilities.h"
 #include "winTimer.h"
+#include "arrayTree.h"
+#include "BinarySearch.h"
 using std::cout;
 using std::cin;
 using std::endl;
@@ -33,14 +35,24 @@ void runTest(string msg, vector<double> input) {
 		for each (double n in input) cout << n << ", ";
 	}
 	cout << endl;
+
 	ArrayTree A = ArrayTree(1.0);
 	Timer T = Timer();
 	T.start();
 	for each (double n in input) A.fit(n);
 	T.stop();
-	cout << "First Fit Output: " << endl;
+	cout << "First Fit Output: ";
 	A.printBins();
-	cout << endl << "First Fit - Elapsed time: " << T() << " seconds." << endl;
+	cout << endl;
+
+	BinarySearch B = BinarySearch(1.0);
+	Timer S = Timer();
+	S.start();
+	for each (double n in input) B.insert(n);
+	S.stop();
+	cout << "Best Fit Output: ";
+	B.print();
+	cout << endl;
 }
 
 // Runs all tests

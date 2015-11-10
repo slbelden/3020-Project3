@@ -22,23 +22,29 @@ using std::vector;
 void generateRandom(int numGenerate);
 
 int main() {
-	BinarySearch B = BinarySearch(1.0);
-
-	while(true) {
-		double in;
-		cout << "Type a double 0.0 to 1.0: ";
-		cin >> in;
-		B.insert(in);
-		B.print();
-		cout << endl;
-	}
-
-
-	/*
 	string command;
 	int toGenerate;
-	cout << "Enter a command (tests, random, complexity, exit): ";
+	cout << "Enter a command (input, tests, random, complexity, exit): ";
 	getline(cin, command);
+
+	if(command.substr(0, 1) == string("i")) {
+		cout << endl;
+		ArrayTree A = ArrayTree(1.0);
+		BinarySearch B = BinarySearch(1.0);
+
+		while(true) {
+			double in;
+			cout << "Enter a double 0.0 to 1.0: ";
+			cin >> in;
+			A.fit(in);
+			B.insert(in);
+			cout << "First Fit: ";
+			A.printBins();
+			cout << endl << "Best Fit: ";
+			B.print();
+			cout << endl << endl;
+		}
+	}
 
 	if(command.substr(0, 1) == string("t")) {
 		cout << "Running All Test Casses..." << endl;
@@ -54,29 +60,48 @@ int main() {
 	else if(command.substr(0, 1) == string("c")) {
 		cout << endl << "This code will run unill an insert call takes longer than 10 seconds"
 			<< endl << endl;
-		double previousTime = 0.0;
-		cout << "First Fit:" << endl;
-		for(int i = 1; previousTime < 10.0; i *= 2) {
-			ArrayTree A = ArrayTree(1.0);
-			Timer T = Timer();
-			vector<double> generated;
-			for(int j = 0; j < i; j++) generated.push_back(randUniform());
-			T.start();
-			for each (double n in generated) A.fit(n);
-			T.stop();
-			// Make sure everything is lined up by inserting tabs only when the
-			// int to be printed is short:
-			cout << "Inserting " << generated.size() << ((i < 100000) ? "\t\t" : "\t")
-				<< "elements using first fit took " << T() << " seconds." << endl;
-			previousTime = T();
+		{
+			double previousTime = 0.0;
+			cout << "First Fit:" << endl;
+			for(int i = 1; previousTime < 10.0; i *= 2) {
+				ArrayTree A = ArrayTree(1.0);
+				Timer T = Timer();
+				vector<double> generated;
+				for(int j = 0; j < i; j++) generated.push_back(randUniform());
+				T.start();
+				for each (double n in generated) A.fit(n);
+				T.stop();
+				// Make sure everything is lined up by inserting tabs only when the
+				// int to be printed is short:
+				cout << "Inserting " << generated.size() << ((i < 100000) ? "\t\t" : "\t")
+					<< "elements using first fit took " << T() << " seconds." << endl;
+				previousTime = T();
+			}
 		}
-		previousTime = 0.0;
+		cout << endl;
+		{
+			double previousTime = 0.0;
+			cout << "Best Fit:" << endl;
+			for(int i = 1; previousTime < 10.0; i *= 2) {
+				BinarySearch B = BinarySearch(1.0);
+				Timer T = Timer();
+				vector<double> generated;
+				for(int j = 0; j < i; j++) generated.push_back(randUniform());
+				T.start();
+				for each (double n in generated) B.insert(n);
+				T.stop();
+				// Make sure everything is lined up by inserting tabs only when the
+				// int to be printed is short:
+				cout << "Inserting " << generated.size() << ((i < 100000) ? "\t\t" : "\t")
+					<< "elements using best fit took " << T() << " seconds." << endl;
+				previousTime = T();
+			}
+		}
 		cout << endl << endl;
 	}
 
 	else if(command.substr(0, 1) == string("e")) exit(0);
 	else cout << "Unrecognized command." << endl << endl;
-	*/
 }
 
 void generateRandom(int numGenerate) {

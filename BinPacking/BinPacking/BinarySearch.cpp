@@ -13,15 +13,15 @@ BinarySearch::BinarySearch(double data) {
 
 void BinarySearch::addNode(double data) {
 	BinarySearch* newNode = new BinarySearch(data);
-	if (isLeaf()) {
-		if (newNode->data_ > data_) {
+	if(left_ == nullptr || right_ == nullptr) {
+		if(newNode->data_ > data_) {
 			right_ = newNode;
 		}
 		else {
 			left_ = newNode;
 		}
 	}
-	else if (newNode->data_ > data_) {
+	else if(newNode->data_ > data_) {
 		(*right_).addNode(data);
 	}
 	else {
@@ -29,29 +29,34 @@ void BinarySearch::addNode(double data) {
 	}
 }
 
-void BinarySearch::insert(double object)
-{ 
-	object -= 0.00000000001;
-	if (object == data_) {
-		data_ -= object;
-		moveNode();
-	}
-	else if (object > data_) {
-		if (right_ == nullptr) {
-			addNode(1.0 - object);
-		}
-		else{
-			(*right_).insert(object);
-		}
+void BinarySearch::insert(double object) {
+	if(object > 1.0 || object < 0.0) {
+		cout << "Tried to insert an object larger than 1.0 or smaller than 0.0" << endl
+			<< "Nothing was inserted." << endl;
 	}
 	else {
-		if (left_ == nullptr) {
+		object -= 0.00000000001; // Double precision fudge
+		if(object == data_) {
+			data_ -= object;
+			moveNode();
+		}
+		else if(object > data_) {
+			if(right_ == nullptr) {
+				addNode(1.0 - object);
+			}
+			else {
+				(*right_).insert(object);
+			}
+		}
+		else {
+			if(left_ == nullptr) {
 				data_ -= object;
 				moveNode();
 			}
 			else {
 				(*left_).insert(object);
 			}
+		}
 	}
 }
 
@@ -76,19 +81,19 @@ void BinarySearch::moveNode() {
 	}
 }
 
-bool BinarySearch::isLeaf() const{
-	if (left_ == nullptr && right_ == nullptr) {
+bool BinarySearch::isLeaf() const {
+	if(left_ == nullptr && right_ == nullptr) {
 		return true;
 	}
 	return false;
 }
 
-void BinarySearch::print() const{
+void BinarySearch::print() const {
 	cout << data_ << " ";
-	if (left_ != nullptr) {
+	if(left_ != nullptr) {
 		(*left_).print();
 	}
-	if (right_ != nullptr) {
+	if(right_ != nullptr) {
 		(*right_).print();
 	}
 }
