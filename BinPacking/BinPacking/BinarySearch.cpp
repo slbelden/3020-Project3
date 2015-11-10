@@ -64,7 +64,7 @@ void BinarySearch::moveNode() {
 		}
 	}
 	else {
-		if(left_ != nullptr) {
+		if(right_ != nullptr) {
 			if(right_->data_ < data_) {
 				BinarySearch* temp = right_;
 				right_ = current_;
