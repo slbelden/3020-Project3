@@ -17,7 +17,7 @@ public:
 	WinnerTree getParent();
 	WinnerTree * getCurrent();
 	bool isLeaf();
-	int getRoot();
+	double getRoot();
 	void insertNode(double root);
 	void replay();
 	void battle();

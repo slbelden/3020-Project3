@@ -47,7 +47,7 @@ WinnerTree WinnerTree::getParent() {
 }
 
 // returns the root value of a node
-int WinnerTree::getRoot() {
+double WinnerTree::getRoot() {
 	return root_;
 }
 
@@ -257,10 +257,11 @@ bool WinnerTree::isPerm()
 
 void WinnerTree::insertObject(double object)
 {
-	if ((*current_).isLeaf || fits(object))
+	if ((*current_).isLeaf() || fits(object))
 	{
 		(*bin_).insert(object);
 		root_ = (*bin_).getRoomLeft();
+		replay();
 	}
 	else if (fits(object) || (*left_).fits(object))
 	{
