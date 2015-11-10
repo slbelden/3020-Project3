@@ -12,16 +12,16 @@ BinarySearch::BinarySearch(double data) {
 }
 
 void BinarySearch::addNode(double data) {
-	BinarySearch newNode = BinarySearch(data);
+	BinarySearch* newNode = new BinarySearch(data);
 	if (isLeaf()) {
-		if (newNode.data_ > data_) {
-			right_ = &newNode;
+		if (newNode->data_ > data_) {
+			right_ = newNode;
 		}
 		else {
-			left_ = &newNode;
+			left_ = newNode;
 		}
 	}
-	else if (newNode.data_ > data_) {
+	else if (newNode->data_ > data_) {
 		(*right_).addNode(data);
 	}
 	else {
@@ -55,7 +55,7 @@ void BinarySearch::insert(double object)
 }
 
 void BinarySearch::moveNode() {
-	if(left_ != nullptr) {
+	if(!isLeaf()) {
 		if(left_->data_ > data_) {
 			BinarySearch* temp = left_;
 			left_ = current_;
@@ -64,7 +64,7 @@ void BinarySearch::moveNode() {
 		}
 	}
 	else {
-		if(right_ != nullptr) {
+		if(!isLeaf()) {
 			if(right_->data_ < data_) {
 				BinarySearch* temp = right_;
 				right_ = current_;
