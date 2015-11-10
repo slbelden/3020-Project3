@@ -75,3 +75,15 @@ bool BinarySearch::isLeaf() {
 	}
 	return false;
 }
+
+void BinarySearch::print() {
+	if (isLeaf()) {
+		cout << data_ << " ";
+	}
+	else if (left_ != nullptr) {
+		(*left_).print();
+	}
+	else if (right_ != nullptr) {
+		(*right_).print();
+	}
+}

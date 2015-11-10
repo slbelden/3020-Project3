@@ -4,6 +4,7 @@
 
 #pragma once
 using namespace std;
+#include <iostream>
 
 class BinarySearch {
 public:
@@ -12,6 +13,7 @@ public:
 	void insert(double object);
 	void moveNode();
 	bool isLeaf();
+	void print();
 
 private:
 	BinarySearch* left_;

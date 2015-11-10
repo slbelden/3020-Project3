@@ -10,6 +10,7 @@
 #include "arrayTree.h"
 #include "Tests.h"
 #include "RandomUtilities.h"
+#include "BinarySearch.h"
 using std::cout;
 using std::cin;
 using std::endl;
