@@ -33,7 +33,7 @@ private:
 	WinnerTree * right_;
 	WinnerTree * parent_;
 	WinnerTree * current_;
-	bool perm;
+	bool perm_;
 
 	int calcHeight(WinnerTree* node) const;
 };

@@ -16,7 +16,7 @@ WinnerTree::WinnerTree(int root) {
 	right_ = nullptr;
 	root_ = root;
 	current_ = this;
-	perm = true;
+	perm_ = true;
 }
 
 // Creates an inner node
@@ -26,7 +26,7 @@ WinnerTree::WinnerTree(WinnerTree * left, WinnerTree * right, int root) {
 	root_ = root;
 	parent_ = nullptr;
 	current_ = this;
-	perm = false;
+	perm_ = false;
 }
 
 // retruns a pointer to the left tree
@@ -72,6 +72,8 @@ bool WinnerTree::isLeaf() {
 // returns a ponter to the new leaf
 // insertNode reassigns parents
 void WinnerTree::insertNode(int root) {
+	// Must be declared as pointers to "new" objects to keep the objects from
+	// being deleted at the end of the block
 	WinnerTree* leaf = new WinnerTree(root);
 	WinnerTree* original = new WinnerTree(left_, right_, root_);
 
@@ -168,7 +170,7 @@ void WinnerTree::replay() {
 void WinnerTree::battle() {
 	if (left_ == nullptr)
 	{
-		perm = true;
+		perm_ = true;
 	}
 	else if(left_->root_ >= right_->root_) {
 		root_ = left_->root_;
@@ -178,11 +180,11 @@ void WinnerTree::battle() {
 	}
 	if ((*left_).isPerm() && (*right_).isPerm())
 	{
-		perm = true;
+		perm_ = true;
 	}
 	else
 	{
-		perm = false;
+		perm_ = false;
 	}
 }
 
