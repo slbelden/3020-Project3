@@ -106,59 +106,66 @@ void ArrayTree::modify(unsigned int location, double data) {
 }
 
 unsigned int ArrayTree::fit(double obj) {
-	// Trivial Case
-	if(tree[0].size() == 1) {
-		// If the found location is too small, a new empty bin is needed
-		if(tree[0][0] < obj) {
-			insert(1.0);
-			modify(1, obj);
-		}
-		else modify(0, obj);
+	if(obj > 1.0 || obj < 0.0) {
+		cout << "Tried to insert an object larger than 1.0 or smaller than 0.0" << endl
+			<< "Nothing was inserted." << endl;
 		return 0;
 	}
-
-	// Start from the bottom of the tree (ultimate winner)
-	unsigned int level = tree.size() - 1;
-	unsigned int location = 0;
-
-	// Itterate up through every level of the tree
-	do {
-		// Figure out the locations of the left and right child
-		// Usually, this is easy:
-		unsigned int left = location * 2;
-		unsigned int right = left + 1;
-		
-		// But if the row above has an odd number of elements,
-		// We must consider that the last element of that row
-		// references different elements
-		if(tree[level - 1].size() % 2 == 1 && 
-			tree[level - 1].size() - 1 == left) {
-			left--;
-			right--;
+	else {
+		// Trivial Case
+		if(tree[0].size() == 1) {
+			// If the found location is too small, a new empty bin is needed
+			if(tree[0][0] < obj) {
+				insert(1.0);
+				modify(1, obj);
+			}
+			else modify(0, obj);
+			return 0;
 		}
 
-		// Look at the left first
-		if(obj <= tree[level - 1][left]) location = left;
-		// Else it can't fit into the left side, so look right
-		else location = right;
+		// Start from the bottom of the tree (ultimate winner)
+		unsigned int level = tree.size() - 1;
+		unsigned int location = 0;
 
-		level--;
-	} while (level > 0);
+		// Itterate up through every level of the tree
+		do {
+			// Figure out the locations of the left and right child
+			// Usually, this is easy:
+			unsigned int left = location * 2;
+			unsigned int right = left + 1;
 
-	// If the found location does not exist, a new empty bin is needed
-	if(tree[0].size() - 1 < location) {
-		insert(1.0);
-		modify(location, obj);
+			// But if the row above has an odd number of elements,
+			// We must consider that the last element of that row
+			// references different elements
+			if(tree[level - 1].size() % 2 == 1 &&
+				tree[level - 1].size() - 1 == left) {
+				left--;
+				right--;
+			}
+
+			// Look at the left first
+			if(obj <= tree[level - 1][left]) location = left;
+			// Else it can't fit into the left side, so look right
+			else location = right;
+
+			level--;
+		} while(level > 0);
+
+		// If the found location does not exist, a new empty bin is needed
+		if(tree[0].size() - 1 < location) {
+			insert(1.0);
+			modify(location, obj);
+		}
+		// If the found location is too small, a new empty bin is needed
+		// And the bin to insert into must be the one after the found location
+		else if(tree[0][location] < obj) {
+			insert(1.0);
+			modify(location + 1, obj);
+		}
+		else modify(location, obj);
+
+		return location;
 	}
-	// If the found location is too small, a new empty bin is needed
-	// And the bin to insert into must be the one after the found location
-	else if(tree[0][location] < obj) {
-		insert(1.0);
-		modify(location + 1, obj);
-	}
-	else modify(location, obj);
-
-	return location;
 }
 
 void ArrayTree::print() const {
