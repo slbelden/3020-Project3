@@ -26,6 +26,7 @@ void ArrayTree::insert(double data) {
 	unsigned int level = 0;
 	do {
 		unsigned int numThisLevel = tree[level].size();
+
 		// If there are an odd number of leaves in this level
 		// add one to the num of leaves before devision,
 		// so we still reach the correct node
@@ -61,13 +62,101 @@ void ArrayTree::insert(double data) {
 	} while(tree[level].size() > 1);
 }
 
+void ArrayTree::modify(unsigned int location, double data) {
+	// Make sure this is a valid change
+	if(tree[0].size() - 1 >= location) {
+		// Change the data
+		tree[0][location] -= data;
+
+		// If there is only one bin, the modify is trivial
+		if(tree[0].size() == 1) {
+			tree[1][0] -= data;
+		}
+		else {
+			// Replay the inner nodes below the inserted node
+			// Because we've already made the change at the leaf layer,   
+			// we can change the variable "location" without harm.
+			unsigned int level = 0;
+			do {
+				// The node we need to update is always the n/2th (or n/2 + 1)th node
+				// in the level below, where n is the location
+				unsigned int nextLocation = location / 2;
+
+				// If this is an odd location (even #th node), compare to the left
+				// If this is an even location (odd #th node), compare right
+				// If this is the last element in a row, you must compare left
+				// Find the max, and put the winner in the inner node.
+				if(location % 2 == 1 || tree[level].size() - 1 == location) {
+					tree[level + 1][nextLocation]
+						= max(tree[level][location], tree[level][location - 1]);
+				}
+				else {
+					tree[level + 1][nextLocation]
+						= max(tree[level][location], tree[level][location + 1]);
+				}
+
+				level++;
+				location = nextLocation;
+			} while(tree[level].size() > 1);
+		}
+	}
+}
+
+unsigned int ArrayTree::fit(double obj) {
+	// Trivial Case
+	if(tree[0].size() == 1) {
+		// If the found location is too small, a new empty bin is needed
+		if(tree[0][0] < obj) {
+			insert(1.0);
+			modify(1, obj);
+		}
+		else modify(0, obj);
+		return 0;
+	}
+
+	// Start from the bottom of the tree (ultimate winner)
+	unsigned int level = tree.size() - 1;
+	unsigned int location = 0;
+
+	// Itterate up through every level of the tree
+	do {
+		// Figure out the locations of the left and right child
+		// Usually, this is easy:
+		unsigned int left = location * 2;
+		unsigned int right = left + 1;
+		
+		// But if the row above has an odd number of elements,
+		// We must consider that the last element of that row
+		// references different elements
+		if(tree[level - 1].size() % 2 == 1 && 
+			tree[level - 1].size() - 1 == location) {
+			left--;
+			right--;
+		}
+
+		// Look at the left first
+		if(obj <= tree[level - 1][left]) location = left;
+		// Else it can't fit into the left side, so look right
+		else location = right;
+
+		level--;
+	} while (level > 0);
+
+	// If the found location is too small, a new empty bin is needed
+	if(tree[0].size() - 1 <= location || tree[0][location] < obj) {
+		insert(1.0);
+		modify(location + 1, obj);
+	}
+	else modify(location, obj);
+
+	return location;
+}
+
 void ArrayTree::print() const {
 	for(unsigned int row = 0; row < tree.size(); row++) {
 		for(unsigned int element = 0; element < tree[row].size(); element++) {
 			cout << tree[row][element];
-			for(unsigned int i = 0; i < row+1; i++) {
-				cout << " ";
-			}
+			for(unsigned int i = 0; i < row+1; i++) cout << " ";
 		}
 		cout << endl;
 	}

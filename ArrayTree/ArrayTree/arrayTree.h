@@ -29,6 +29,8 @@ class ArrayTree {
 public:
 	ArrayTree(double data);
 	void insert(double data);
+	void modify(unsigned int location, double data);
+	unsigned int fit(double obj);
 	void print() const;
 
 private:
