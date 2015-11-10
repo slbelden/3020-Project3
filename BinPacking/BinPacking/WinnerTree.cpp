@@ -208,10 +208,10 @@ void WinnerTree::tournament() {
 // returns a pointer to the first node with a root larger
 // than the input
 // if the input is larger than any roots, nullptr is returned
-WinnerTree * WinnerTree::fits(double test) {
+bool WinnerTree::fits(double test) {
 	if((*current_).isLeaf()) {
 		if(root_ > test) {
-			return current_;
+			return true;
 		}
 	}
 	else if((*left_).isLeaf()) {
@@ -224,7 +224,7 @@ WinnerTree * WinnerTree::fits(double test) {
 		(*left_).fits(test);
 		(*right_).fits(test);
 	}
-	return nullptr;
+	return false;
 }
 
 bool WinnerTree::isPerm()

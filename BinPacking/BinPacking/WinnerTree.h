@@ -22,7 +22,7 @@ public:
 	void replay();
 	void battle();
 	void tournament();
-	WinnerTree * fits(double test);
+	bool fits(double test);
 	bool isPerm();
 	void WinnerTree::print_inorder();
 	void WinnerTree::inorder(WinnerTree* p);
