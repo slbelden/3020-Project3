@@ -10,23 +10,25 @@ using std::cout;
 #include "WinnerTree.h"
 
 //Creates a Leaf
-WinnerTree::WinnerTree(int root) {
+WinnerTree::WinnerTree(double root) {
 	parent_ = nullptr;
 	left_ = nullptr;
 	right_ = nullptr;
 	root_ = root;
 	current_ = this;
 	perm_ = true;
+	bin_ = new Bin;
 }
 
 // Creates an inner node
-WinnerTree::WinnerTree(WinnerTree * left, WinnerTree * right, int root) {
+WinnerTree::WinnerTree(WinnerTree * left, WinnerTree * right, double root) {
 	left_ = left;
 	right_ = right;
 	root_ = root;
 	parent_ = nullptr;
 	current_ = this;
 	perm_ = false;
+	bin_ = nullptr;
 }
 
 // retruns a pointer to the left tree
@@ -71,7 +73,7 @@ bool WinnerTree::isLeaf() {
 // new leaf on the right
 // returns a ponter to the new leaf
 // insertNode reassigns parents
-void WinnerTree::insertNode(int root) {
+void WinnerTree::insertNode(double root) {
 	// Must be declared as pointers to "new" objects to keep the objects from
 	// being deleted at the end of the block
 	WinnerTree* leaf = new WinnerTree(root);
@@ -206,7 +208,7 @@ void WinnerTree::tournament() {
 // returns a pointer to the first node with a root larger
 // than the input
 // if the input is larger than any roots, nullptr is returned
-WinnerTree * WinnerTree::fits(int test) {
+WinnerTree * WinnerTree::fits(double test) {
 	if((*current_).isLeaf()) {
 		if(root_ > test) {
 			return current_;
@@ -251,6 +253,28 @@ bool WinnerTree::isPerm()
 			}
 		}
 	return true;
+}
+
+void WinnerTree::insertObject(double object)
+{
+	if ((*current_).isLeaf || fits(object))
+	{
+		(*bin_).insert(object);
+		root_ = (*bin_).getRoomLeft();
+	}
+	else if (fits(object) || (*left_).fits(object))
+	{
+		(*left_).insertObject(object);
+	}
+	else if (fits(object) || (*right_).fits(object))
+	{
+		(*right_).insertObject(object);
+	}
+	else
+	{
+		insertNode(1.0);
+		insertObject(object);
+	}
 }
 
 void WinnerTree::print_inorder() {
