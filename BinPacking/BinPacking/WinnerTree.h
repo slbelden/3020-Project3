@@ -25,6 +25,7 @@ public:
 	bool isPerm();
 	void WinnerTree::print_inorder();
 	void WinnerTree::inorder(WinnerTree* p);
+	int maxHeight() const;
 
 private:
 	int root_;
@@ -33,4 +34,6 @@ private:
 	WinnerTree * parent_;
 	WinnerTree * current_;
 	bool perm;
+
+	int calcHeight(WinnerTree* node) const;
 };

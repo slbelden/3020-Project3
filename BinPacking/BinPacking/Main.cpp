@@ -28,17 +28,13 @@ int main() {
 	T.print_inorder();
 	cout << endl;
 
-	T.insertNode(2);
-	T.print_inorder();
-	cout << endl;
+	for(int i = 2; i <= 30; i++) {
+		T.insertNode(i);
+	}
 
-	T.insertNode(3);
 	T.print_inorder();
 	cout << endl;
-
-	T.insertNode(4);
-	T.print_inorder();
-	cout << endl;
+	cout << "Max Height is " << T.maxHeight() << endl;
 
 	/*
 	string command;

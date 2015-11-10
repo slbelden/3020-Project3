@@ -85,7 +85,7 @@ void WinnerTree::insertNode(int root) {
 	}
 
 	// current is permanent
-	else if ((*current_).isPerm)
+	else if ((*current_).isPerm())
 	{
 		left_ = original;
 		right_ = leaf;
@@ -242,4 +242,17 @@ void WinnerTree::inorder(WinnerTree* p) {
 		cout << " " << p->root_ << " ";
 		if(p->right_) inorder(p->right_);
 	}
+}
+
+// Translation function to allow use of recursive function calcHeight
+// without the need to specify an argument from the user's perspective.
+int WinnerTree::maxHeight() const{
+	return calcHeight(current_);
+}
+
+int WinnerTree::calcHeight(WinnerTree* node) const {
+	if(node == nullptr) return 0;
+	int left = calcHeight(node->left_);
+	int right = calcHeight(node->right_);
+	return (left > right) ? left + 1 : right + 1;
 }
