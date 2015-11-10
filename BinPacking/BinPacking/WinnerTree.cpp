@@ -257,17 +257,17 @@ bool WinnerTree::isPerm()
 
 void WinnerTree::insertObject(double object)
 {
-	if ((*current_).isLeaf() || fits(object))
+	if ((*current_).isLeaf() && fits(object))
 	{
 		(*bin_).insert(object);
 		root_ = (*bin_).getRoomLeft();
 		replay();
 	}
-	else if (fits(object) || (*left_).fits(object))
+	else if (fits(object) && (*left_).fits(object))
 	{
 		(*left_).insertObject(object);
 	}
-	else if (fits(object) || (*right_).fits(object))
+	else if (fits(object) && (*right_).fits(object))
 	{
 		(*right_).insertObject(object);
 	}
