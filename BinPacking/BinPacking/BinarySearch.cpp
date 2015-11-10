@@ -31,6 +31,7 @@ void BinarySearch::addNode(double data) {
 
 void BinarySearch::insert(double object)
 { 
+	object -= 0.00000000001;
 	if (object == data_) {
 		data_ -= object;
 		moveNode();
@@ -55,7 +56,7 @@ void BinarySearch::insert(double object)
 }
 
 void BinarySearch::moveNode() {
-	if(!isLeaf()) {
+	if(left_ != nullptr && right_ != nullptr) {
 		if(left_->data_ > data_) {
 			BinarySearch* temp = left_;
 			left_ = current_;
@@ -64,7 +65,7 @@ void BinarySearch::moveNode() {
 		}
 	}
 	else {
-		if(!isLeaf()) {
+		if(left_ != nullptr && right_ != nullptr) {
 			if(right_->data_ < data_) {
 				BinarySearch* temp = right_;
 				right_ = current_;
@@ -82,22 +83,12 @@ bool BinarySearch::isLeaf() const{
 	return false;
 }
 
-void BinarySearch::printAll() const{
+void BinarySearch::print() const{
 	cout << data_ << " ";
 	if (left_ != nullptr) {
-		(*left_).printAll();
+		(*left_).print();
 	}
 	if (right_ != nullptr) {
-		(*right_).printAll();
-	}
-}
-
-void BinarySearch::printBins() const{
-	if(isLeaf()) cout << data_ << " ";
-	if(left_ != nullptr) {
-		(*left_).printBins();
-	}
-	if(right_ != nullptr) {
-		(*right_).printBins();
+		(*right_).print();
 	}
 }

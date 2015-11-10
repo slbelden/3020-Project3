@@ -13,8 +13,7 @@ public:
 	void insert(double object);
 	void moveNode();
 	bool isLeaf() const;
-	void printAll() const;
-	void printBins() const;
+	void print() const;
 
 private:
 	BinarySearch* left_;

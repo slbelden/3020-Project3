@@ -29,7 +29,7 @@ int main() {
 		cout << "Type a double 0.0 to 1.0: ";
 		cin >> in;
 		B.insert(in);
-		B.printBins();
+		B.print();
 		cout << endl;
 	}
 
