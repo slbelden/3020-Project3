@@ -107,7 +107,8 @@ unsigned int ArrayTree::fit(double obj) {
 	if(tree[0].size() == 1) {
 		// If the found location is too small, a new empty bin is needed
 		if(tree[0][0] < obj) {
-			insert(1.0);
+			// Slightly larger than 1 to account for double precision errors
+			insert(1.00000001);
 			modify(1, obj);
 		}
 		else modify(0, obj);
@@ -144,7 +145,8 @@ unsigned int ArrayTree::fit(double obj) {
 
 	// If the found location is too small, a new empty bin is needed
 	if(tree[0].size() - 1 <= location || tree[0][location] < obj) {
-		insert(1.0);
+		// Slightly larger than 1 to account for double precision errors
+		insert(1.00000001);
 		modify(location + 1, obj);
 	}
 	else modify(location, obj);
