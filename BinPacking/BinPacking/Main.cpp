@@ -22,6 +22,19 @@ using std::vector;
 void generateRandom(int numGenerate);
 
 int main() {
+	BinarySearch B = BinarySearch(1.0);
+
+	while(true) {
+		double in;
+		cout << "Type a double 0.0 to 1.0: ";
+		cin >> in;
+		B.insert(in);
+		B.printBins();
+		cout << endl;
+	}
+
+
+	/*
 	string command;
 	int toGenerate;
 	cout << "Enter a command (tests, random, complexity, exit): ";
@@ -63,6 +76,7 @@ int main() {
 
 	else if(command.substr(0, 1) == string("e")) exit(0);
 	else cout << "Unrecognized command." << endl << endl;
+	*/
 }
 
 void generateRandom(int numGenerate) {
