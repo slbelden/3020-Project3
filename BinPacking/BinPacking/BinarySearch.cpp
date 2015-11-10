@@ -32,7 +32,7 @@ void BinarySearch::addNode(double data) {
 void BinarySearch::insert(double object)
 { 
 	if (object == data_) {
-		insert(data_ - object);
+		data_ -= object;
 		moveNode();
 	}
 	else if (object > data_) {
