@@ -23,15 +23,21 @@ using std::vector;
 void generateRandom(int numGenerate);
 
 int main() {
-	WinnerTree T = WinnerTree(1);
+	WinnerTree T = WinnerTree(1.0);
 	cout << "At Construction:" << endl;
 	T.print_inorder();
-	cout << endl;
+	cout << endl << endl;
 
-	for(int i = 2; i <= 30; i++) {
-		T.insertNode(i);
-	}
+	T.insertObject(0.1);
+	T.insertObject(0.3);
+	T.insertObject(0.7);
+	T.insertObject(0.2);
+	T.insertObject(0.1);
+	T.insertObject(0.8);
+	T.insertObject(0.4);
+	T.insertObject(0.5);
 
+	cout << "After Insertions: " << endl;
 	T.print_inorder();
 	cout << endl;
 	cout << "Max Height is " << T.maxHeight() << endl;
