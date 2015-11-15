@@ -9,6 +9,7 @@ BinarySearch::BinarySearch(double data) {
 	left_ = nullptr;
 	right_ = nullptr;
 	current_ = this;
+	parent_ = nullptr;
 }
 
 void BinarySearch::addNode(double data) {
@@ -16,9 +17,11 @@ void BinarySearch::addNode(double data) {
 	if(left_ == nullptr || right_ == nullptr) {
 		if(newNode->data_ > data_) {
 			right_ = newNode;
+			right_->parent_ = current_;
 		}
 		else {
 			left_ = newNode;
+			left_->parent_ = current_;
 		}
 	}
 	else if(newNode->data_ > data_) {
@@ -37,8 +40,9 @@ void BinarySearch::insert(double object) {
 	else {
 		object -= 0.00000000001; // Double precision fudge
 		if(object == data_) {
-			data_ -= object;
-			moveNode();
+			double temp = data_;
+			deleteNode();
+			addNode(temp - object);
 		}
 		else if(object > data_) {
 			if(right_ == nullptr) {
@@ -50,8 +54,9 @@ void BinarySearch::insert(double object) {
 		}
 		else {
 			if(left_ == nullptr) {
-				data_ -= object;
-				moveNode();
+				double temp = data_;
+				deleteNode();
+				addNode(temp - object);
 			}
 			else {
 				(*left_).insert(object);
@@ -60,8 +65,58 @@ void BinarySearch::insert(double object) {
 	}
 }
 
-void BinarySearch::moveNode() {
-	if(left_ != nullptr && right_ != nullptr) {
+void BinarySearch::deleteNode() {
+	// node to be deleted is a leaf
+	if (isLeaf()) {
+		// node is to the left of parent
+		if (parent_->left_ == current_) {
+			parent_->left_ = nullptr;
+		}
+		// node is to the right of parent
+		else {
+			parent_->right_ = nullptr;
+		}
+	}
+	//node to be deleted has one child
+	else if (left_ == nullptr || right == nullptr) {
+		// child is on the left of node
+		if (left_ != nullptr) {
+			if (parent_->left_ == current_) {
+				parent_->left_ = left_;
+			}
+			else {
+				parent_->right_ = left_;
+			}
+		}
+		// child is on the right of node
+		else {
+			if (parent_->left_ == current_) {
+				parent_->left_ = right_;
+			}
+			else {
+				parent_->right_ = right_;
+			}
+		}
+	}
+	// node has two children
+	else {
+		BinarySearch* temp = (*right_).findMin();
+		data_ = temp->data_;
+		(*temp).deleteNode();
+	}
+}
+
+BinarySearch* BinarySearch::findMin() {
+	if (isLeaf() || left_ == nullptr) {
+		return current_;
+	}
+	else {
+		(*left_).findMin();
+	}
+}
+
+/*void BinarySearch::moveNode() {
+	if(left_ != nullptr) {
 		if(left_->data_ > data_) {
 			BinarySearch* temp = left_;
 			left_ = current_;
@@ -69,17 +124,15 @@ void BinarySearch::moveNode() {
 			moveNode();
 		}
 	}
-	else {
-		if(left_ != nullptr && right_ != nullptr) {
+	else if (right_ != nullptr) {
 			if(right_->data_ < data_) {
 				BinarySearch* temp = right_;
 				right_ = current_;
 				current_ = temp;
 				moveNode();
 			}
-		}
 	}
-}
+}*/
 
 bool BinarySearch::isLeaf() const {
 	if(left_ == nullptr && right_ == nullptr) {

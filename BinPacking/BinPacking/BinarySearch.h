@@ -14,10 +14,13 @@ public:
 	void moveNode();
 	bool isLeaf() const;
 	void print() const;
+	void deleteNode();
+	BinarySearch* findMin();
 
 private:
 	BinarySearch* left_;
 	BinarySearch* right_;
 	BinarySearch* current_;
+	BinarySearch* parent_;
 	double data_;
 };

@@ -60,7 +60,7 @@ int main() {
 	else if(command.substr(0, 1) == string("c")) {
 		cout << endl << "This code will run unill an insert call takes longer than 10 seconds"
 			<< endl << endl;
-		{
+		/*{
 			double previousTime = 0.0;
 			cout << "First Fit:" << endl;
 			for(int i = 1; previousTime < 10.0; i *= 2) {
@@ -78,7 +78,7 @@ int main() {
 				previousTime = T();
 			}
 		}
-		cout << endl;
+		cout << endl;*/
 		{
 			double previousTime = 0.0;
 			cout << "Best Fit:" << endl;
