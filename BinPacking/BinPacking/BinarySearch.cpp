@@ -43,10 +43,13 @@ void BinarySearch::insert(double object) {
 			if (parent_ == nullptr && isLeaf()) {
 				data_ -= object;
 			}
+			// *****CHANGED	
 			else {
+				BinarySearch* tmp = parent_;
 				double temp = data_;
 				deleteNode();
-				addNode(temp - object);
+				(*tmp).addNode(temp - object);
+				
 			}
 		}
 		else if(object > data_) {
@@ -62,10 +65,13 @@ void BinarySearch::insert(double object) {
 				if (parent_ == nullptr && isLeaf()) {
 					data_ -= object;
 				}
+				//******CHANGED
 				else {
+					BinarySearch* tmp = parent_;
 					double temp = data_;
 					deleteNode();
-					addNode(temp - object);
+					(*tmp).addNode(temp - object);
+					
 
 				}
 			}
@@ -82,11 +88,13 @@ void BinarySearch::deleteNode() {
 		// node is to the left of parent
 		if (parent_->left_ == current_) {
 			parent_->left_ = nullptr;
+			current_->parent_ = nullptr;
 			//delete current_;
 		}
 		// node is to the right of parent
 		else {
 			parent_->right_ = nullptr;
+			current_->parent_ = nullptr;
 			//delete current_;
 		}
 	}
@@ -98,6 +106,7 @@ void BinarySearch::deleteNode() {
 			if (parent_ == nullptr) {
 				BinarySearch* temp = current_;
 				current_ = left_;
+				temp->left_ = nullptr;
 				//delete temp;
 			}
 			else if (parent_->left_ == current_) {
@@ -113,6 +122,7 @@ void BinarySearch::deleteNode() {
 			if (parent_ == nullptr) {
 				BinarySearch* temp = current_;
 				current_ = right_;
+				temp->right_ = nullptr;
 				//delete temp;
 			}
 			else if (parent_->left_ == current_) {
