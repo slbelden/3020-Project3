@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4ADF1632-F328-44A0-8C14-FB60CF89B07F}</ProjectGuid>
+    <ProjectGuid>{14A6E1DD-BDAA-470C-B177-BCEC863D4EFD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>BinPacking</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
