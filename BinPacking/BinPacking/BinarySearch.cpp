@@ -40,9 +40,14 @@ void BinarySearch::insert(double object) {
 	else {
 		object -= 0.00000000001; // Double precision fudge
 		if(object == data_) {
-			double temp = data_;
-			deleteNode();
-			addNode(temp - object);
+			if (parent_ == nullptr && isLeaf()) {
+				data_ -= object;
+			}
+			else {
+				double temp = data_;
+				deleteNode();
+				addNode(temp - object);
+			}
 		}
 		else if(object > data_) {
 			if(right_ == nullptr) {
@@ -53,10 +58,16 @@ void BinarySearch::insert(double object) {
 			}
 		}
 		else {
-			if(left_ == nullptr) {
-				double temp = data_;
-				deleteNode();
-				addNode(temp - object);
+			if (left_ == nullptr) {
+				if (parent_ == nullptr && isLeaf()) {
+					data_ -= object;
+				}
+				else {
+					double temp = data_;
+					deleteNode();
+					addNode(temp - object);
+
+				}
 			}
 			else {
 				(*left_).insert(object);
@@ -71,17 +82,25 @@ void BinarySearch::deleteNode() {
 		// node is to the left of parent
 		if (parent_->left_ == current_) {
 			parent_->left_ = nullptr;
+			//delete current_;
 		}
 		// node is to the right of parent
 		else {
 			parent_->right_ = nullptr;
+			//delete current_;
 		}
 	}
 	//node to be deleted has one child
 	else if (left_ == nullptr || right == nullptr) {
 		// child is on the left of node
 		if (left_ != nullptr) {
-			if (parent_->left_ == current_) {
+			// current is the root
+			if (parent_ == nullptr) {
+				BinarySearch* temp = current_;
+				current_ = left_;
+				//delete temp;
+			}
+			else if (parent_->left_ == current_) {
 				parent_->left_ = left_;
 			}
 			else {
@@ -90,7 +109,13 @@ void BinarySearch::deleteNode() {
 		}
 		// child is on the right of node
 		else {
-			if (parent_->left_ == current_) {
+			// current is the root
+			if (parent_ == nullptr) {
+				BinarySearch* temp = current_;
+				current_ = right_;
+				//delete temp;
+			}
+			else if (parent_->left_ == current_) {
 				parent_->left_ = right_;
 			}
 			else {
